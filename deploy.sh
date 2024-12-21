@@ -7,7 +7,7 @@ region="ap-south-1"
 
 if [ "$Environment_name" == "beta" ]; then
     frontend_S3_bucket="beta-todo-app"
-elif ["$Environment_name" == "prod" ]; then
+elif [ "$Environment_name" == "prod" ]; then
     frontend_S3_bucket="prod-todo-app"
 else 
     echo "Invalid environment name"
