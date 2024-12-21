@@ -62,6 +62,7 @@ pipeline {
         stage("Beta Deployment"){
             steps {
                 echo "Deploying to Beta stage"
+                 sh "chmod +x -R ./deploy.sh"
                 sh "./deploy.sh beta ${beta_access_key} ${beta_secret_access_key}"
             }
         }
