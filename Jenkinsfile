@@ -1,10 +1,7 @@
 pipeline {
     agent any 
     environment {
-        beta_access_key = credentials("beta_access_key")
-        beta_secret_access_key = credentials("beta_secret_access_key")
-        prod_access_key = credentials("prod_access_key")
-        prod_secret_access_key = credentials("prod_secret_access_key")
+        REGION = "ap-south-1"
     }
     stages {
         // checkout the code
@@ -61,9 +58,16 @@ pipeline {
 
         stage("Beta Deployment"){
             steps {
-                echo "Deploying to Beta stage"
-                 sh "chmod +x -R ./deploy.sh"
-                sh "./deploy.sh beta ${beta_access_key} ${beta_secret_access_key}"
+                withCredentials([
+                    string(credentialsId: 'beta_access_key', variable: 'AWS_ACCESS_KEY'),
+                    string(credentialsId: 'beta_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]) {
+                    script{
+                        echo "Deploying to Beta stage"
+                        sh "chmod +x -R ./deploy.sh"
+                        sh "./deploy.sh beta ${AWS_ACCESS_KEY} ${AWS_SECRET_ACCESS_KEY}"
+                    }
+                }
             }
         }
         // deploy
