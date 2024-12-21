@@ -21,12 +21,12 @@ pipeline {
             steps {
                 dir("todo-backend"){
                     echo "Installing the backend dependencies"
-                    sh "npm ci"
+                    sh "npm install"
                 }
 
                 dir("todo-frontend"){
                     echo "Installing the frontend dependencies"
-                    sh "npm ci"
+                    sh "npm install"
                 }
             }
         }
