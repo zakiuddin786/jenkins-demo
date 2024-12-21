@@ -14,5 +14,5 @@ else
     exit 1
 fi
 
-echo "Deploying to frontend s3 bucket $S3_bucket_name"
+echo "Deploying to frontend s3 bucket $frontend_S3_bucket $AWS_ACCESS_KEY $AWS_SECRET_ACCESS_KEY"
 aws s3 sync ./todo-frontend/build/ s3://$frontend_S3_bucket --delete --region $region
